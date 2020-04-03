@@ -1,6 +1,7 @@
 package pages;
 
 import java.util.Properties;
+import java.util.UUID;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -186,17 +187,23 @@ public class RegistrationPage {
 		this.getSaveAccountInformationBtn().click();
 	}
 	
-	public void register(String userid, String password, String firstname, 
-									 String lastname, String email, String phone, 
+	public String generateUniqueId() {
+		String uniqueID = UUID.randomUUID().toString();
+		String userID = uniqueID.substring(0, 7);
+		return userID;
+	}
+	
+	public void register(String userID, String password, String firstName, 
+									 String lastName, String email, String phone, 
 									 String address1, String address2, String city, 
 									 String state, String zip, String country, 
 									 String language, String category, 
-									 String mylist, String mybanner) { 
-		this.setUserId(userid);
+									 String myList, String myBanner) { 
+		this.setUserId(userID);
 		this.setNewPassword(password);
 		this.setRepeatPassword(password);
-		this.setFirstName(firstname);
-		this.setLastName(lastname);
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
 		this.setEmail(email);
 		this.setPhone(phone);
 		this.setAddress1(address1);
@@ -207,8 +214,8 @@ public class RegistrationPage {
 		this.setCountry(country);
 		this.setLanguagePreference(language);
 		this.setFavouriteCategory(category);
-		this.setMyList(mylist);
-		this.setMyBanner(mybanner);
+		this.setMyList(myList);
+		this.setMyBanner(myBanner);
 		this.clickSaveAccountInformationBtn();
 		
 	}

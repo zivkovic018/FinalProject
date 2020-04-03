@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -45,13 +44,12 @@ public class RegistrationTest {
 		ExcelUtils.setWorkSheet(1);
 		for (int i = 1; i < ExcelUtils.getRowNumber(); i++) {
 
-			String uniqueID = UUID.randomUUID().toString();
-			String userid = uniqueID.substring(0, 7);
-			ExcelUtils.setDataAt(i, 0, userid);
+			String userID = rp.generateUniqueId();
+			ExcelUtils.setDataAt(i, 0, userID);
 
 			String password = ExcelUtils.getDataAt(i, 1);
-			String firstname = ExcelUtils.getDataAt(i, 2);
-			String lastname = ExcelUtils.getDataAt(i, 3);
+			String firstName = ExcelUtils.getDataAt(i, 2);
+			String lastName = ExcelUtils.getDataAt(i, 3);
 			String email = ExcelUtils.getDataAt(i, 4);
 			String phone = ExcelUtils.getDataAt(i, 5);
 			String address1 = ExcelUtils.getDataAt(i, 6);
@@ -62,12 +60,12 @@ public class RegistrationTest {
 			String country = ExcelUtils.getDataAt(i, 11);
 			String language = ExcelUtils.getDataAt(i, 12);
 			String category = ExcelUtils.getDataAt(i, 13);
-			String mylist = ExcelUtils.getDataAt(i, 14);
-			String mybanner = ExcelUtils.getDataAt(i, 15);
+			String myList = ExcelUtils.getDataAt(i, 14);
+			String myBanner = ExcelUtils.getDataAt(i, 15);
 
-			rp.register(userid, password, firstname, lastname, email, 
+			rp.register(userID, password, firstName, lastName, email, 
 								phone, address1, address2, city, state,
-								zip, country, language, category, mylist, mybanner);
+								zip, country, language, category, myList, myBanner);
 
 			WebElement siderbarMenu = this.driver.findElement(By.xpath(locators.getProperty("sidebar_menu")));
 
