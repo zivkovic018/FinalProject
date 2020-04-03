@@ -52,7 +52,7 @@ public class CartTest {
 			this.driver.navigate().to(item_link);
 			sip.clickAddToCart();
 
-			sa.assertTrue(cp.checkItemsId(item_id));
+			sa.assertTrue(cp.verifyItemExistsByID(item_id));
 		}
 		
 		sa.assertAll();

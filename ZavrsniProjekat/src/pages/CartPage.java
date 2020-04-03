@@ -48,7 +48,7 @@ public class CartPage {
 		this.getProcedToCheckout().click();
 	}
 
-	public boolean checkItemsId(String item_id) {
+	public boolean verifyItemExistsByID(String item_id) {
 		List<WebElement> elements = this.getItems();
 		boolean itemIdIsOk = true;
 		for (int i = 0; i < elements.size(); i++) {
