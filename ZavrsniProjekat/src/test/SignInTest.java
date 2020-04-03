@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -16,6 +14,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import pages.PetStoreMenuPage;
+import pages.RegistrationPage;
 import pages.SignInPage;
 import utils.ExcelUtils;
 
@@ -39,6 +39,7 @@ public class SignInTest {
 	public void signInTest() {
 		this.driver.navigate().to(locators.getProperty("sign_In_page_url"));
 		SignInPage sip = new SignInPage(driver, locators);
+		PetStoreMenuPage psmp = new PetStoreMenuPage(driver, locators);
 		SoftAssert sa = new SoftAssert();
 
 		ExcelUtils.setExcell(this.locators.getProperty("data_source"));
@@ -50,8 +51,7 @@ public class SignInTest {
 
 			sip.signIn(username, password);
 
-			WebElement message = this.driver.findElement(By.xpath(locators.getProperty("welcome_message")));
-			sa.assertTrue(message.isDisplayed());
+			sa.assertTrue(psmp.getWelcomeMessage().isDisplayed());
 
 			this.driver.navigate().to(locators.getProperty("sign_In_page_url"));
 		}
@@ -62,13 +62,11 @@ public class SignInTest {
 	public void registerNowTest() {
 		this.driver.navigate().to(locators.getProperty("sign_In_page_url"));
 		SignInPage sip = new SignInPage(driver, locators);
+		RegistrationPage rp = new RegistrationPage(driver, locators);
 
 		sip.clickRegisterNow();;
 
-		WebElement saveAccountInformationBtn = this.driver
-				.findElement(By.xpath(locators.getProperty("save_account_information_btn")));
-
-		Assert.assertTrue(saveAccountInformationBtn.isDisplayed());
+		Assert.assertTrue(rp.getSaveAccountInformationBtn().isDisplayed());
 	}
 
 	@AfterClass

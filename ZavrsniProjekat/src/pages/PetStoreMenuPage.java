@@ -35,6 +35,18 @@ public class PetStoreMenuPage {
 	public WebElement getSignInBtn() {
 		return this.driver.findElement(By.xpath(locators.getProperty("sign_In")));
 	}
+	
+	public WebElement getLogInBtn() {
+		return this.driver.findElement(By.xpath(locators.getProperty("login_btn")));
+	}
+	
+	public WebElement getCatalogTitle() {
+		return this.driver.findElement(By.xpath(locators.getProperty("catalog_title")));
+	}
+	
+	public WebElement getWelcomeMessage() {
+		return this.driver.findElement(By.xpath(locators.getProperty("welcome_message")));
+	}
 
 	public void clickSignInBtn() {
 		this.getSignInBtn().click();
@@ -46,7 +58,7 @@ public class PetStoreMenuPage {
 		for (int i = 0; i < elements.size(); i++) {
 			int status = this.verifyURLStatus(elements.get(i).getAttribute("href"));
 			if (status >= 400) {
-				MenuItemsStatusIsOk = false;
+				return MenuItemsStatusIsOk = false;
 			}
 		}
 		return MenuItemsStatusIsOk;
@@ -57,7 +69,7 @@ public class PetStoreMenuPage {
 		boolean sidebarMenuItemsPathIsOk = false;
 		for (int i = 0; i < elements.size(); i++) {
 			elements.get(i).click();
-			if (this.driver.findElement(By.xpath(locators.getProperty("catalog_title"))).isDisplayed()) {
+			if (this.getCatalogTitle().isDisplayed()) {
 				sidebarMenuItemsPathIsOk = true;
 			}
 			this.driver.navigate().to(locators.getProperty("jpet_store_home_page_url"));
@@ -71,7 +83,7 @@ public class PetStoreMenuPage {
 		boolean quickMenuItemsPathIsOk = false;
 		for (int i = 0; i < elements.size(); i++) {
 			elements.get(i).click();
-			if (this.driver.findElement(By.xpath(locators.getProperty("catalog_title"))).isDisplayed()) {
+			if (this.getCatalogTitle().isDisplayed()) {
 				quickMenuItemsPathIsOk = true;
 			}
 			this.driver.navigate().to(locators.getProperty("jpet_store_home_page_url"));
@@ -85,7 +97,7 @@ public class PetStoreMenuPage {
 		boolean imageMenuItemsPathIsOk = false;
 		for (int i = 0; i < elements.size(); i++) {
 			elements.get(i).click();
-			if (this.driver.findElement(By.xpath(locators.getProperty("catalog_title"))).isDisplayed()) {
+			if (this.getCatalogTitle().isDisplayed()) {
 				imageMenuItemsPathIsOk = true;
 			}
 			this.driver.navigate().to(locators.getProperty("jpet_store_home_page_url"));

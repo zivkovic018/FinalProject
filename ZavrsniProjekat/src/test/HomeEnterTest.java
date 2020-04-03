@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -39,9 +37,7 @@ public class HomeEnterTest {
 		HomePage hp = new HomePage(driver, locators);
 		hp.clickEnterTheStore();
 
-		WebElement QuestionMark = this.driver.findElement(By.xpath(locators.getProperty("question_mark")));
-
-		Assert.assertTrue(QuestionMark.isDisplayed());
+		Assert.assertTrue(hp.getQuestionMark().isDisplayed());
 	}
 
 	@AfterClass
@@ -49,3 +45,4 @@ public class HomeEnterTest {
 		this.driver.close();
 	}
 }
+

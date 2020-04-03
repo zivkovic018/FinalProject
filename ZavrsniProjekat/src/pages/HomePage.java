@@ -19,6 +19,10 @@ public class HomePage {
 	public WebElement getEnterTheStore() {
 		return this.driver.findElement(By.xpath(locators.getProperty("enter_the_store")));
 	}
+	
+	public WebElement getQuestionMark() {
+		return this.driver.findElement(By.xpath(locators.getProperty("question_mark")));
+	}
 
 	public void clickEnterTheStore() {
 		this.getEnterTheStore().click();

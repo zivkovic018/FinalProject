@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -68,9 +66,7 @@ public class PetStoreMenuTest {
 
 		psmp.clickSignInBtn();;
 
-		WebElement loginbtn = this.driver.findElement(By.xpath(locators.getProperty("login_btn")));
-
-		Assert.assertTrue(loginbtn.isDisplayed());
+		Assert.assertTrue(psmp.getLogInBtn().isDisplayed());
 	}
 
 	@AfterClass

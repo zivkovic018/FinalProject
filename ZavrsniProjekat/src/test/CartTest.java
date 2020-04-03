@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -77,14 +75,15 @@ public class CartTest {
 			sip.clickAddToCart();;
 		}
 		
-		Assert.assertTrue(cp.sumTotalCost() == cp.checkSubTotal());
+		Assert.assertTrue(cp.getSumTotalCost() == cp.getSubTotalPrice());
 	}
 
 	@Test (priority = 3)
 	public void deleteCookiesCartTest() {
 		this.driver.navigate().to(locators.getProperty("cart_page_url"));
 		StoreItemPage sip = new StoreItemPage(driver, locators);
-
+		CartPage cp = new CartPage(driver, locators);
+		
 		ExcelUtils.setExcell(this.locators.getProperty("data_source"));
 		ExcelUtils.setWorkSheet(0);
 
@@ -100,9 +99,7 @@ public class CartTest {
 		this.driver.manage().deleteCookieNamed(this.locators.getProperty("cookie_name"));
 		this.driver.navigate().refresh();
 
-		WebElement message = this.driver.findElement(By.xpath(locators.getProperty("cart_is_empty_message")));
-
-		Assert.assertTrue(message.isDisplayed());
+		Assert.assertTrue(cp.getCartIsEmptyMessage().isDisplayed());
 	}
 
 	@AfterClass

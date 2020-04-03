@@ -25,10 +25,14 @@ public class CartPage {
 		return this.driver.findElement(By.xpath(locators.getProperty("proced_to_checkout_btn")));
 	}
 
+	public WebElement getCartIsEmptyMessage() {
+		return this.driver.findElement(By.xpath(locators.getProperty("cart_is_empty_message")));
+	}
+
 	public List<WebElement> getItems() {
 		List<WebElement> items = this.driver.findElements(By.xpath(locators.getProperty("items")));
 		items.remove(0);
-		items.remove(items.size()-1);
+		items.remove(items.size() - 1);
 		return items;
 	}
 
@@ -58,24 +62,24 @@ public class CartPage {
 		return itemIdIsOk;
 	}
 
-	public int checkSubTotal() {
+	public int getSubTotalPrice() {
 		String subtotalstr = this.getSubTotal().getText().substring(12);
 		double subtotaldouble = Double.parseDouble(subtotalstr);
 		int subtotalint = (int) (subtotaldouble * 100);
 		return subtotalint;
 	}
 
-	public int sumTotalCost() {
+	public int getSumTotalCost() {
 		List<WebElement> elements = this.getItems();
-		double totalcost = 0;
+		int totalCost = 0;
 		for (int i = 0; i < elements.size(); i++) {
 			WebElement total_cost = elements.get(i).findElement(By.xpath(locators.getProperty("total_cost")));
-			String pricestr = total_cost.getText().substring(1);
-			double pricedouble = Double.parseDouble(pricestr);
-			totalcost += pricedouble;
+			String txtPrice = total_cost.getText().substring(1);
+			double price = Double.parseDouble(txtPrice);
+			int sumPrice = (int) (price * 100);
+			totalCost += sumPrice;
 		}
-		int totalcostint = (int) (totalcost * 100); 
-		return totalcostint;
+		return totalCost;
 	}
 
 }
